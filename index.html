@@ -15,6 +15,7 @@
     gtag('config', 'G-8DMBL9Z2DC');
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     * {
@@ -545,12 +546,12 @@
 <body>
   <!-- HEADER -->
   <div class="header">
-    <div class="header-title">⚡ FollowFlow</div>
+    <div class="header-title"><i class="fas fa-bolt"></i> FollowFlow</div>
     <div class="nav-tabs">
-      <button class="nav-tab active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-      <button class="nav-tab" onclick="switchTab('leads')">👥 Leads</button>
-      <button class="nav-tab" onclick="switchTab('reminders')">🔔 Reminders</button>
-      <button class="nav-tab" onclick="switchTab('settings')">⚙️ Settings</button>
+      <button class="nav-tab active" onclick="switchTab('dashboard')"><i class="fas fa-chart-line"></i> Dashboard</button>
+      <button class="nav-tab" onclick="switchTab('leads')"><i class="fas fa-users"></i> Leads</button>
+      <button class="nav-tab" onclick="switchTab('reminders')"><i class="fas fa-bell"></i> Reminders</button>
+      <button class="nav-tab" onclick="switchTab('settings')"><i class="fas fa-cog"></i> Settings</button>
     </div>
   </div>
 
@@ -586,27 +587,27 @@
       <div style="padding: 12px;">
         <div style="margin-bottom: 16px;">
           <button class="btn btn-primary" style="width: 100%;" onclick="document.getElementById('fileInput').click()">
-            📂 Import Excel
+            <i class="fas fa-upload"></i> Import Excel
           </button>
           <input type="file" id="fileInput" accept=".xlsx,.xls" style="display: none;" onchange="importExcel(event)">
         </div>
         <div style="margin-bottom: 16px;">
           <button class="btn btn-ghost" style="width: 100%;" onclick="exportToExcel()">
-            📥 Export Backup
+            <i class="fas fa-download"></i> Export Backup
           </button>
         </div>
         <div style="margin-bottom: 16px;">
           <button class="btn btn-ghost" style="width: 100%;" onclick="generateSample()">
-            📋 Download Sample
+            <i class="fas fa-file-excel"></i> Download Sample
           </button>
         </div>
         <div>
           <div style="font-size: 12px; color: var(--muted); line-height: 1.6;">
             <strong>About:</strong><br>
             FollowFlow helps you never miss a follow-up.<br><br>
-            ✅ Track leads<br>
-            ✅ Manage follow-ups<br>
-            ✅ Monitor deals<br><br>
+            <i class="fas fa-check" style="color: var(--green); margin-right: 6px;"></i>Track leads<br>
+            <i class="fas fa-check" style="color: var(--green); margin-right: 6px;"></i>Manage follow-ups<br>
+            <i class="fas fa-check" style="color: var(--green); margin-right: 6px;"></i>Monitor deals<br><br>
             Data saved locally on your device.
           </div>
         </div>
@@ -740,12 +741,12 @@
       const today = leads.filter(l => l.nextFollowUp === new Date().toISOString().split('T')[0]).length;
 
       const stats = [
-        { label: 'Total', value: total, icon: '👥' },
-        { label: 'Pipeline', value: `$${(pipeline/1000).toFixed(1)}k`, icon: '💰' },
-        { label: 'Won', value: `$${(won/1000).toFixed(1)}k`, icon: '🏆' },
-        { label: 'Today', value: today, icon: '📅', alert: today > 0 },
-        { label: 'Overdue', value: overdue, icon: '⚠️', alert: overdue > 0 },
-        { label: 'Sync', value: 'Never', icon: '🔄' }
+        { label: 'Total', value: total, icon: '<i class="fas fa-users"></i>' },
+        { label: 'Pipeline', value: `$${(pipeline/1000).toFixed(1)}k`, icon: '<i class="fas fa-chart-pie"></i>' },
+        { label: 'Won', value: `$${(won/1000).toFixed(1)}k`, icon: '<i class="fas fa-trophy"></i>' },
+        { label: 'Today', value: today, icon: '<i class="fas fa-calendar"></i>', alert: today > 0 },
+        { label: 'Overdue', value: overdue, icon: '<i class="fas fa-exclamation-triangle"></i>', alert: overdue > 0 },
+        { label: 'Sync', value: 'Never', icon: '<i class="fas fa-sync"></i>' }
       ];
 
       document.getElementById('statsGrid').innerHTML = stats.map(s => `
@@ -762,7 +763,7 @@
       if (recent.length === 0) {
         document.getElementById('recentLeads').innerHTML = `
           <div class="empty-state">
-            <div class="empty-state-icon">🚀</div>
+            <div class="empty-state-icon"><i class="fas fa-rocket"></i></div>
             <div class="empty-state-title">Get Started</div>
             <div class="empty-state-text">Add your first lead to track follow-ups</div>
           </div>
@@ -777,7 +778,7 @@
             <div class="lead-name">${l.name}</div>
             <div class="lead-company">${l.company}</div>
             <span class="lead-status">${l.status}</span>
-            ${l.nextFollowUp ? `<div class="lead-meta">📅 ${new Date(l.nextFollowUp).toLocaleDateString()}</div>` : ''}
+            ${l.nextFollowUp ? `<div class="lead-meta"><i class="fas fa-calendar"></i> ${new Date(l.nextFollowUp).toLocaleDateString()}</div>` : ''}
           </div>
         </div>
       `).join('');
@@ -794,7 +795,7 @@
       if (filtered.length === 0) {
         document.getElementById('allLeads').innerHTML = `
           <div class="empty-state">
-            <div class="empty-state-icon">🔍</div>
+            <div class="empty-state-icon"><i class="fas fa-search"></i></div>
             <div class="empty-state-title">No Leads Found</div>
           </div>
         `;
@@ -808,10 +809,10 @@
             <div class="lead-name">${l.name}</div>
             <div class="lead-company">${l.company}</div>
             <span class="lead-status">${l.status}</span>
-            ${l.value ? `<div class="lead-meta">💰 $${Number(l.value).toLocaleString()}</div>` : ''}
-            ${l.nextFollowUp ? `<div class="lead-meta">📅 ${new Date(l.nextFollowUp).toLocaleDateString()}</div>` : ''}
+            ${l.value ? `<div class="lead-meta"><i class="fas fa-dollar-sign"></i> $${Number(l.value).toLocaleString()}</div>` : ''}
+            ${l.nextFollowUp ? `<div class="lead-meta"><i class="fas fa-calendar"></i> ${new Date(l.nextFollowUp).toLocaleDateString()}</div>` : ''}
           </div>
-          <button class="btn btn-small btn-ghost" onclick="event.stopPropagation(); deleteLead(${l.id})">🗑</button>
+          <button class="btn btn-small btn-ghost" onclick="event.stopPropagation(); deleteLead(${l.id})"><i class="fas fa-trash"></i></button>
         </div>
       `).join('');
     }
@@ -825,42 +826,42 @@
       let html = '';
 
       if (overdue.length > 0) {
-        html += `<div style="padding: 12px; color: var(--red); font-weight: 600; font-size: 12px; text-transform: uppercase; margin-bottom: 8px;">⚠️ Overdue (${overdue.length})</div>`;
+        html += `<div style="padding: 12px; color: var(--red); font-weight: 600; font-size: 12px; text-transform: uppercase; margin-bottom: 8px;"><i class="fas fa-exclamation-circle"></i> Overdue (${overdue.length})</div>`;
         html += overdue.map(l => `
           <div class="lead-card" onclick="editLead(${l.id})">
             <div class="lead-avatar" style="background: linear-gradient(135deg, #7f1d1d, #991b1b);">${l.name.charAt(0).toUpperCase()}</div>
             <div class="lead-info">
               <div class="lead-name">${l.name}</div>
               <div class="lead-company">${l.company}</div>
-              <div class="lead-meta" style="color: var(--red);">Due ${new Date(l.nextFollowUp).toLocaleDateString()}</div>
+              <div class="lead-meta" style="color: var(--red);"><i class="fas fa-calendar"></i> Due ${new Date(l.nextFollowUp).toLocaleDateString()}</div>
             </div>
           </div>
         `).join('');
       }
 
       if (dueToday.length > 0) {
-        html += `<div style="padding: 12px; color: var(--yellow); font-weight: 600; font-size: 12px; text-transform: uppercase; margin-bottom: 8px; margin-top: 8px;">📅 Due Today (${dueToday.length})</div>`;
+        html += `<div style="padding: 12px; color: var(--yellow); font-weight: 600; font-size: 12px; text-transform: uppercase; margin-bottom: 8px; margin-top: 8px;"><i class="fas fa-calendar"></i> Due Today (${dueToday.length})</div>`;
         html += dueToday.map(l => `
           <div class="lead-card" onclick="editLead(${l.id})">
             <div class="lead-avatar">${l.name.charAt(0).toUpperCase()}</div>
             <div class="lead-info">
               <div class="lead-name">${l.name}</div>
               <div class="lead-company">${l.company}</div>
-              <div class="lead-meta" style="color: var(--yellow);">Follow up today</div>
+              <div class="lead-meta" style="color: var(--yellow);"><i class="fas fa-clock"></i> Follow up today</div>
             </div>
           </div>
         `).join('');
       }
 
       if (upcoming.length > 0) {
-        html += `<div style="padding: 12px; color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; margin-bottom: 8px; margin-top: 8px;">Upcoming</div>`;
+        html += `<div style="padding: 12px; color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; margin-bottom: 8px; margin-top: 8px;"><i class="fas fa-list"></i> Upcoming</div>`;
         html += upcoming.map(l => `
           <div class="lead-card" onclick="editLead(${l.id})">
             <div class="lead-avatar">${l.name.charAt(0).toUpperCase()}</div>
             <div class="lead-info">
               <div class="lead-name">${l.name}</div>
               <div class="lead-company">${l.company}</div>
-              <div class="lead-meta">📅 ${new Date(l.nextFollowUp).toLocaleDateString()}</div>
+              <div class="lead-meta"><i class="fas fa-calendar"></i> ${new Date(l.nextFollowUp).toLocaleDateString()}</div>
             </div>
           </div>
         `).join('');
@@ -869,7 +870,7 @@
       if (!html) {
         html = `
           <div class="empty-state">
-            <div class="empty-state-icon">🎉</div>
+            <div class="empty-state-icon"><i class="fas fa-check-circle"></i></div>
             <div class="empty-state-title">All Caught Up!</div>
           </div>
         `;
